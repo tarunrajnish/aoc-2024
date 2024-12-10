@@ -79,6 +79,7 @@ def get_backward_lookup(input):
 
 def get_valid_updates(all_updates, forward_dict, backward_dict):
     valid_updates = []
+    invalid_updates = []
     
     for update in all_updates:
         is_valid = True
