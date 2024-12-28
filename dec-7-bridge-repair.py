@@ -21,10 +21,12 @@ def evaluate_left_to_right(operands, operators):
             result += operands[i + 1]  # Add the next operand
         elif op == "*":
             result *= operands[i + 1]  # Multiply the next operand
+        elif op == "||":
+            result = int(str(result) + str(operands[i + 1]))
     return result
 
 def get_valids(data):
-    possible_operators = ["+", "*"]
+    possible_operators = ["+", "*", "||"]
     valid_results = set()
     
     for item in data:
@@ -33,14 +35,14 @@ def get_valids(data):
         numbers = [int(num) for num in operands.split()]
         no_operators = len(numbers) - 1
         
-        print(f"expected: {expected_value}, operands: {operands}, numbers: {numbers}, no_operators:{no_operators}")
+        # print(f"expected: {expected_value}, operands: {operands}, numbers: {numbers}, no_operators:{no_operators}")
         
         operator_combinations = itertools.product(possible_operators, repeat=no_operators)
 
         for ops in operator_combinations:
             # print(ops)
             result = evaluate_left_to_right(numbers, ops)
-            print(f"Expression: {numbers[0]} {' '.join([f'{op} {num}' for op, num in zip(ops, numbers[1:])])}, Result: {result}")
+            # print(f"Expression: {numbers[0]} {' '.join([f'{op} {num}' for op, num in zip(ops, numbers[1:])])}, Result: {result}")
             
             if int(result) == int(expected_value):
                 valid_results.add(expected_value)
